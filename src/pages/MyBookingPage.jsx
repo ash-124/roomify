@@ -3,16 +3,19 @@ import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import BookingModal from "../components/BookingModal";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const MyBookingsPage = () => {
     const [bookings, setBookings] = useState([]);
     const [modalType, setModalType] = useState(null);
     const [selectedBooking, setSelectedBooking] = useState(null);
-    const { user } = useContext(AuthContext);
+    const { user, loading, setLoading } = useContext(AuthContext);
+
 
     const fetchBookings = async () => {
         const email = user?.email; // Replace with dynamic user
         const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/booking?email=${email}`);
+        setLoading(false)
         setBookings(data);
         // console.log('booked rooms of loggedIn user', data)
     };
@@ -43,7 +46,9 @@ const MyBookingsPage = () => {
             toast.error("Action failed. Try again!", error);
         }
     };
-
+    if(loading){
+        return <LoadingSpinner/>
+    }
     return (
         <div>
             <h2 className="text-2xl font-bold mb-4">My Bookings</h2>
