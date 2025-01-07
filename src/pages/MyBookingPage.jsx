@@ -12,9 +12,9 @@ const MyBookingsPage = () => {
 
     const fetchBookings = async () => {
         const email = user?.email; // Replace with dynamic user
-        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/booking/${email}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/booking?email=${email}`);
         setBookings(data);
-        console.log('booked rooms of loggedIn user', data)
+        // console.log('booked rooms of loggedIn user', data)
     };
 
     useEffect(() => {
@@ -25,8 +25,12 @@ const MyBookingsPage = () => {
     const handleAction = async (payload) => {
         try {
             if (modalType === "cancel") {
-                await axios.delete(`${import.meta.env.VITE_API_URL}/booked-rooms/${selectedBooking._id}`);
-                toast.success("Booking canceled successfully!");
+                const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/booking/${selectedBooking.roomId}?id=${selectedBooking._id}`);
+                if (data?.deletedCount === 1) {
+                    toast.success("Booking canceled successfully!");
+                }
+                // console.log(data)
+
             } else if (modalType === "update") {
                 await axios.put(`${import.meta.env.VITE_API_URL}/booked-rooms/${selectedBooking._id}`, { bookingDate: payload });
                 toast.success("Booking date updated successfully!");

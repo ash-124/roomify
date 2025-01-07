@@ -10,7 +10,7 @@ const FeaturedRooms = () => {
             const fetchAllData = async () => {
 
                 const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/allRooms?featured=true`)
-                console.log(data)
+                
                 setFeaturedRooms(data)
             }
             fetchAllData();

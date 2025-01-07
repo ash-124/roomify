@@ -1,26 +1,32 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Room from "../components/Room";
+import { AuthContext } from "../providers/AuthProvider";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AllRoom = () => {
     const [rooms, setRooms] = useState([])
+    const { loading, setLoading } = useContext(AuthContext)
     try {
         useEffect(() => {
 
             const fetchAllData = async () => {
 
                 const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/allRooms`)
-                console.log(data)
+                setLoading(false)
                 setRooms(data)
             }
             fetchAllData();
 
-        }, [])
+        }, [setLoading])
 
 
 
     } catch (error) {
         console.log(error)
+    }
+    if(loading){
+        return <LoadingSpinner/>
     }
     return (
         <div>
