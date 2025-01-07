@@ -22,6 +22,7 @@
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.1.1",
     "react-slick": "^0.30.3",
+    "react-star-rating-input": "^8.0.1",
     "react-tabs": "^6.0.2",
     "slick-carousel": "^1.8.1",
     "sort-by": "^1.2.0",

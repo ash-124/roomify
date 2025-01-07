@@ -6,8 +6,8 @@ import Logout from '../pages/Authentication/Logout'
 import Home from '../pages/Home'
 import AllRoom from '../pages/AllRoom'
 import RoomDetails from '../pages/RoomDetails'
-import MyBookings from '../pages/MyBookings'
 import PrivateRoute from './PrivateRoute'
+import MyBookingsPage from '../pages/MyBookingPage'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/my-bookings',
-        element:<PrivateRoute><MyBookings/></PrivateRoute>
+        element:<PrivateRoute><MyBookingsPage/></PrivateRoute>
       }
     ],
   },
