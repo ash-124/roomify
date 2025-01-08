@@ -77,7 +77,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="flex gap-0">
-                    <a className="btn btn-ghost text-xl">Modern Hotel Booking</a>
+                    <Link to={"/"} className="btn btn-ghost text-xl">Roomify</Link >
                     <div className="w-[40px] h-auto"></div>
                 </div>
             </div>

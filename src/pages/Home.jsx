@@ -13,8 +13,8 @@ const Home = () => {
                 <DhakaMap />
             </div>
             <FeaturedRooms />
-            <Services/>
-            <TestimonialsSection/>
+            <Services />
+            <TestimonialsSection />
         </div>
     );
 };
