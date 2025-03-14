@@ -7,25 +7,26 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const AllRoom = () => {
     const [rooms, setRooms] = useState([])
     const { loading, setLoading } = useContext(AuthContext)
+    const [roomLoading, setRoomLoading] = useState(true);
     try {
         useEffect(() => {
 
             const fetchAllData = async () => {
 
                 const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/allRooms`)
-                setLoading(false)
+                setRoomLoading(false)
                 setRooms(data)
             }
             fetchAllData();
 
-        }, [setLoading])
+        }, [setLoading, setRoomLoading])
 
 
 
     } catch (error) {
         console.log(error)
     }
-    if(loading){
+    if(loading || roomLoading){
         return <LoadingSpinner/>
     }
     return (

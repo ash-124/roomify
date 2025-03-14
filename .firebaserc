@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "visa-navigator-fab2f"
-  }
+    "default": "roomify-a7e50",
+    "roomify": "roomify-a7e50"
+  },
+  "targets": {},
+  "etags": {}
 }

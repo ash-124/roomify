@@ -23,7 +23,7 @@ const DhakaMap = () => {
         <div>
             <h2 className='text-4xl mb-4  font-bold text-center'>Hotel&apos;s Map </h2>
         </div>
-        <MapContainer center={dhakaCoordinates} zoom={13} scrollWheelZoom={false} style={{ height: "80vh", width: "100%" }}>
+        <MapContainer center={dhakaCoordinates} zoom={13} scrollWheelZoom={false} style={{ height: "80vh", width: "100%", zIndex:50 }}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

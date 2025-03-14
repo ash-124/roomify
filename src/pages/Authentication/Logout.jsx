@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
 import bgImg from '../../assets/register.jpg'
-import logo from '../../assets/logo.png'
 import { useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
 import toast from 'react-hot-toast'
@@ -50,7 +49,7 @@ const Logout = () => {
       <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
         <div className='w-full px-6 py-8 md:px-8 lg:w-1/2'>
           <div className='flex justify-center mx-auto'>
-            <img className='w-auto h-7 sm:h-8' src={logo} alt='' />
+            <img className='w-auto h-7 sm:h-8' src={"/roomify.webp"} alt='' />
           </div>
 
           <p className='mt-3 text-xl text-center text-gray-600 '>

@@ -37,20 +37,14 @@ const Navbar = () => {
 
     const links =
         <>
-            <li><NavLink role="tab" to="/" className={({ isActive }) =>
-                isActive ? "tab tab-active   text-blue-600 underline" : "tab"
-            } >Home</NavLink></li>
-            <li><NavLink role="tab" to="/rooms" className={({ isActive }) =>
-                isActive ? "tab tab-active   text-blue-600 underline" : "tab"
-            } >Rooms</NavLink></li>
-            <li><NavLink role="tab" to="/my-bookings" className={({ isActive }) =>
-                isActive ? "tab tab-active   text-blue-600 underline" : "tab"
-            } >My Bookings</NavLink></li>
+            <li><NavLink role="tab" to="/" >Home</NavLink></li>
+            <li><NavLink role="tab" to="/rooms" >Rooms</NavLink></li>
+            <li><NavLink role="tab" to="/my-bookings"  >My Bookings</NavLink></li>
 
 
         </>
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-blue-700/50  fixed z-[200] bg-base-100">
             <div className="navbar-start">
                 <div className="dropdown z-30">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

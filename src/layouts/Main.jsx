@@ -4,15 +4,17 @@ import Footer from "../components/Footer";
 
 const Main = () => {
     return (
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col bg-gray-300/50 ">
             {/* Navbar */}
-            <Navbar/>
+            <div className="mb-[68px]">
+                <Navbar />
+            </div>
             {/* Dynamic Contents */}
             <div className="flex-grow">
-                <Outlet/>
+                <Outlet />
             </div>
             {/* Footer */}
-            <Footer/>
+            <Footer />
         </div>
     );
 };

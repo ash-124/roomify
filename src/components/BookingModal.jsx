@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Rating } from "react-simple-star-rating";
 import Swal from "sweetalert2";
-import '../assets/custom.css'
 
 const BookingModal = ({ type, booking, onClose, onAction, user }) => {
   console.log({ type, booking, onClose, onAction, user });
@@ -21,6 +19,7 @@ const BookingModal = ({ type, booking, onClose, onAction, user }) => {
         rating: review.rating,
         comment: review.comment,
         timestamp: new Date().toISOString(),
+        roomId: booking.roomId,
       };
       console.log(payload);
       await onAction(payload); // Submit review
@@ -41,14 +40,15 @@ const BookingModal = ({ type, booking, onClose, onAction, user }) => {
         if (result.isConfirmed) {
           await onAction(); // Trigger cancel booking
           Swal.fire("Canceled!", "Your booking has been canceled.", "success");
-          onClose(); // Close the modal after cancellation
+          onClose(); // Close modal after cancellation
         }
       });
+
       return; // Skip the default `onClose()` when SweetAlert is used
     }
     onClose(); // Close modal for review or update
   };
-
+  console.log(review.rating)
   return (
     <div className="modal modal-open">
       <div className="modal-box">
@@ -61,7 +61,6 @@ const BookingModal = ({ type, booking, onClose, onAction, user }) => {
 
         {type === "review" && (
           <div>
-            {/* Review Fields */}
             <div className="mb-4">
               <label className="block text-sm font-bold">Username</label>
               <input
@@ -72,30 +71,22 @@ const BookingModal = ({ type, booking, onClose, onAction, user }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-bold">Rating</label>
-              <div
-                style={{
-                  display: "flex", // Force horizontal layout
-                  flexDirection: "row",
-                  alignItems: "center", // Align stars vertically in the center
-                  gap: "8px", // Add spacing between stars
-                }}
-              >
-                <Rating
-                  onClick={(value) =>
-                    setReview((prev) => ({ ...prev, rating: value }))
-                  }
-                  ratingValue={review.rating || 0}
-                  size={24}
-                  fillColor="orange"
-                  emptyColor="gray"
-                  className="style-module_emptyIcons__Bg-FZ "
-
-                />
-              </div>
+              <label className="block text-sm font-bold">Rating (1-5)</label>
+              <input
+                type="number"
+                className="input input-bordered w-full"
+                min="1"
+                max="5"
+                step="1"
+                value={review.rating}
+                onChange={(e) =>
+                  setReview((prev) => ({
+                    ...prev,
+                    rating: Math.min(5, Math.max(1, Number(e.target.value))), // Ensure value stays valid
+                  }))
+                }
+              />
             </div>
-
-
             <div className="mb-4">
               <label className="block text-sm font-bold">Comment</label>
               <textarea
@@ -109,6 +100,7 @@ const BookingModal = ({ type, booking, onClose, onAction, user }) => {
             </div>
           </div>
         )}
+
 
         {type === "update" && (
           <div className="mb-4">

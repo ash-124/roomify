@@ -10,17 +10,17 @@ const MyBookingsPage = () => {
     const [modalType, setModalType] = useState(null);
     const [selectedBooking, setSelectedBooking] = useState(null);
     const { user, loading, setLoading } = useContext(AuthContext);
-    
 
     const fetchBookings = async () => {
         const email = user?.email; // Replace with dynamic user
-        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/booking?email=${email}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/booking?email=${email}`, { withCredentials: true });
         setLoading(false)
         setBookings(data);
         // console.log('booked rooms of loggedIn user', data)
     };
 
     useEffect(() => {
+
         fetchBookings();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user?.email]);
@@ -35,10 +35,11 @@ const MyBookingsPage = () => {
                 // console.log(data)
 
             } else if (modalType === "update") {
-                await axios.patch(`${import.meta.env.VITE_API_URL}/booked-room/update/${selectedBooking._id}`, { bookingDate: payload });
+                await axios.patch(`${import.meta.env.VITE_API_URL}/booked-room/update/${selectedBooking._id}`, { bookingDate: payload }, { withCredentials: true });
                 toast.success("Booking date updated successfully!");
             } else if (modalType === "review") {
-                await axios.post(`${import.meta.env.VITE_API_URL}/reviews`, { bookingId: selectedBooking._id, review: payload });
+                const {data}= await axios.post(`${import.meta.env.VITE_API_URL}/reviews`, {review: payload });
+                console.log(data)
                 toast.success("Review submitted successfully!");
             }
             fetchBookings();
@@ -46,8 +47,8 @@ const MyBookingsPage = () => {
             toast.error("Action failed. Try again!", error);
         }
     };
-    if(loading){
-        return <LoadingSpinner/>
+    if (loading) {
+        return <LoadingSpinner />
     }
     return (
         <div>

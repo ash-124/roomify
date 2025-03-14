@@ -21,7 +21,7 @@ const RoomDetails = () => {
     const fetchSingleData = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/rooms/${id}`);
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/rooms/${id}`, { withCredentials: true });
             setRoom(data);
         } catch (error) {
             console.log("Error fetching room details:", error);
@@ -107,7 +107,7 @@ const RoomDetails = () => {
     if (loading) {
         return <LoadingSpinner />;
     }
-
+    console.log(ratingAverage)
     return (
         <div className="container mx-auto p-6">
             <div className="card bg-base-100 shadow-xl">
